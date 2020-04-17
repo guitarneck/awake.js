@@ -1,0 +1,36 @@
+{
+  "name": "awake.js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "FORCE_COLOR=t tape ./test/*.test.js ./test/*.spec.js | tap-diff || true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guitarneck/awake.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/guitarneck/awake.js/issues"
+  },
+  "keywords": [
+    "setTimeout",
+    "setInterval",
+    "worker",
+    "thread",
+    "delayed",
+    "task",
+    "start",
+    "stop",
+    "resume",
+    "pause",
+    "running"
+  ],
+  "author": "Laurent STEFAN",
+  "license": "MIT",
+  "devDependencies": {
+    "tap-diff": "^0.1.1",
+    "tape": "^3.0.0"
+  },
+  "dependencies": {}
+}
