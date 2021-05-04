@@ -3,13 +3,13 @@ SRC := index.js
 TST := $(wildcard test/*.js)
 LIB := $(wildcard lib/*.js)
 
-ifeq ($(MAKECMDGOALS),list)
--include mk/list.mk
+ifeq ($(MAKECMDGOALS),help)
+-include mk/help.mk
 endif
 
 .PHONY: clean
 
-nope:
+nope: ## List al sources
 	$(info test : $(TST))
 	$(info lib  : $(LIB))
 	@true
@@ -19,7 +19,7 @@ all: build test
 watch-old:
 	@while true; do make test --question || make test --silent; sleep 3; done
 
-watch:
+watch: ## Watch unit tests
 	@watch "make test --silent"
 
 start:
@@ -30,7 +30,7 @@ build:
 	@echo "not yet implemented"
 	@true
 
-lint: | tmp/linted
+lint: | tmp/linted ## Lint all sources
 tmp/linted: $(SRC) $(LIB) $(TST) | tmp
 	@eslint *.js
 	@touch tmp/linted
@@ -42,7 +42,7 @@ tmp/tested-old: $(SRC) $(LIB) $(TST) | tmp
 	@touch tmp/tested-old
 	@true
 
-test: | tmp/tested
+test: | tmp/tested ## Run unit tests
 tmp/tested: $(SRC) $(LIB) $(TST) | tmp 
 	@FORCE_COLOR=t $(BIN)/tape test/*.js | $(BIN)/tap-diff
 	@touch tmp/tested
@@ -55,13 +55,13 @@ deploy:
 	@echo "not yet implemented"
 	@true
 
-docs: | tmp/documented
+docs: | tmp/documented ## Generate the documentation
 tmp/documented: $(LIB) README.md jsdoc.json | tmp
 	@jsdoc -c jsdoc.json -r README.md lib/*.js
 	@touch tmp/documented
 	@true
 
-clean:
+clean: ## Clean the dist directory
 	@echo "Clearing directory dist..."
 	rm -rf dist/*
 	@echo "Done."
