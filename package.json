@@ -4,7 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "FORCE_COLOR=t tape ./test/*.test.js ./test/*.spec.js | tap-diff || true"
+    "test": "FORCE_COLOR=t tape ./test/*.test.js ./test/*.spec.js | tap-diff || true",
+    "prepublish": "git pull --rebase origin master",
+    "deploy": "git pull --rebase origin master && git push origin master",
+    "patch": "npm version patch && npm publish",
+    "minor": "npm version minor && npm publish",
+    "major": "npm version major && npm publish",
+    "postpublish": "git push origin master --follow-tags"
   },
   "repository": {
     "type": "git",
